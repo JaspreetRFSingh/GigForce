@@ -1,0 +1,6 @@
+package com.gigforce.crm.deal;
+
+/** LEAD -> QUALIFIED -> PROPOSAL -> NEGOTIATION -> CLOSED_WON | CLOSED_LOST */
+public enum DealStage {
+    LEAD, QUALIFIED, PROPOSAL, NEGOTIATION, CLOSED_WON, CLOSED_LOST
+}
