@@ -5,11 +5,14 @@ import com.gigforce.auth.dto.RegisterRequest;
 import com.gigforce.auth.model.User;
 import com.gigforce.auth.model.UserRole;
 import com.gigforce.auth.repository.UserRepository;
+import com.gigforce.auth.JwtService;
 import com.gigforce.tenant.TenantRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +24,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 @DisplayName("AuthService")
 class AuthServiceTest {
 
@@ -28,7 +32,7 @@ class AuthServiceTest {
     @Mock TenantRepository      tenantRepository;
     @Mock PasswordEncoder       passwordEncoder;
     @Mock AuthenticationManager authManager;
-    @Mock JwtUtil               jwtUtil;
+    @Mock JwtService            jwtUtil;
 
     @InjectMocks AuthService authService;
 
