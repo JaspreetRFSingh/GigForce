@@ -17,7 +17,7 @@ public class AuthService {
     private final TenantRepository      tenantRepository;
     private final PasswordEncoder       passwordEncoder;
     private final AuthenticationManager authManager;
-    private final JwtUtil               jwtUtil;
+    private final JwtService            jwtUtil;
 
     public AuthResponse register(RegisterRequest req) {
         if (userRepository.existsByEmail(req.email()))
