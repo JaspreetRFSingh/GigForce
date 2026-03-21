@@ -12,7 +12,7 @@ package com.gigforce.multitenancy;
  */
 public final class TenantContext {
 
-    private static final ThreadLocal<String> CURRENT = new InheritableThreadLocal<>();
+    private static final ThreadLocal<String> CURRENT = new ThreadLocal<>();
 
     private TenantContext() {}
 
