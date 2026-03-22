@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,13 @@ public class JwtUtil implements JwtService {
 
     @Value("${app.jwt.secret}")     private String secret;
     @Value("${app.jwt.expiration}") private long   expiration;
+
+    private SecretKey cachedKey;
+
+    @PostConstruct
+    private void initKey() {
+        this.cachedKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+    }
 
     public String generateToken(UserDetails user, String tenantId, String role) {
         return Jwts.builder()
@@ -49,6 +57,6 @@ public class JwtUtil implements JwtService {
     }
 
     private SecretKey signingKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+        return cachedKey;
     }
 }
