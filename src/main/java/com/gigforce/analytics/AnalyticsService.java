@@ -28,8 +28,11 @@ public class AnalyticsService {
     public DashboardStats getDashboardStats() {
         String tid = TenantContext.get();
 
+        // Single GROUP BY query instead of one query per stage
         Map<DealStage, Long> byStage = Arrays.stream(DealStage.values())
-            .collect(Collectors.toMap(s -> s, s -> dealRepo.countByTenantIdAndStage(tid, s)));
+            .collect(Collectors.toMap(s -> s, s -> 0L));
+        dealRepo.countGroupedByStage(tid)
+            .forEach(row -> byStage.put((DealStage) row[0], (Long) row[1]));
 
         long openDeals = byStage.entrySet().stream()
             .filter(e -> e.getKey() != DealStage.CLOSED_WON && e.getKey() != DealStage.CLOSED_LOST)
@@ -39,11 +42,11 @@ public class AnalyticsService {
             .totalContacts(contactRepo.countByTenantId(tid))
             .totalDeals(byStage.values().stream().mapToLong(Long::longValue).sum())
             .openDeals(openDeals)
-            .wonRevenue(dealRepo.sumWonValueByTenantId(tid))
+            .wonRevenue(dealRepo.sumWonValueByTenantId(tid, DealStage.CLOSED_WON))
             .totalInvoices(invoiceRepo.countByTenantId(tid))
             .paidInvoices(invoiceRepo.countByTenantIdAndStatus(tid, InvoiceStatus.PAID))
             .overdueInvoices(invoiceRepo.countByTenantIdAndStatus(tid, InvoiceStatus.OVERDUE))
-            .paidRevenue(invoiceRepo.sumPaidTotalByTenantId(tid))
+            .paidRevenue(invoiceRepo.sumPaidTotalByTenantId(tid, InvoiceStatus.PAID))
             .dealsByStage(byStage)
             .build();
     }

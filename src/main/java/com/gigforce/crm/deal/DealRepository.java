@@ -13,6 +13,9 @@ public interface DealRepository extends JpaRepository<Deal, UUID> {
     Optional<Deal> findByIdAndTenantId(UUID id, String tenantId);
     long          countByTenantIdAndStage(String tenantId, DealStage stage);
 
-    @Query("SELECT COALESCE(SUM(d.value),0) FROM Deal d WHERE d.tenantId=:tenantId AND d.stage='CLOSED_WON'")
-    BigDecimal sumWonValueByTenantId(String tenantId);
+    @Query("SELECT d.stage, COUNT(d) FROM Deal d WHERE d.tenantId=:tenantId GROUP BY d.stage")
+    List<Object[]> countGroupedByStage(String tenantId);
+
+    @Query("SELECT COALESCE(SUM(d.value),0) FROM Deal d WHERE d.tenantId=:tenantId AND d.stage=:stage")
+    BigDecimal sumWonValueByTenantId(String tenantId, DealStage stage);
 }
