@@ -13,9 +13,8 @@ public interface InvoiceRepository extends JpaRepository<Invoice, UUID> {
     Optional<Invoice> findByIdAndTenantId(UUID id, String tenantId);
     long             countByTenantIdAndStatus(String tenantId, InvoiceStatus status);
 
-    @Query("SELECT COALESCE(SUM(i.total),0) FROM Invoice i WHERE i.tenantId=:tenantId AND i.status='PAID'")
-    BigDecimal sumPaidTotalByTenantId(String tenantId);
+    @Query("SELECT COALESCE(SUM(i.total),0) FROM Invoice i WHERE i.tenantId=:tenantId AND i.status=:status")
+    BigDecimal sumPaidTotalByTenantId(String tenantId, InvoiceStatus status);
 
-    @Query("SELECT COUNT(i) FROM Invoice i WHERE i.tenantId=:tenantId")
     long countByTenantId(String tenantId);
 }
