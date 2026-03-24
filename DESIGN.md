@@ -194,7 +194,7 @@ by adding the `spring-boot-starter-data-redis` dependency and updating
 - **Validation at the boundary** — `@Valid` + Bean Validation annotations on all request DTOs
 - **Structured error responses** — `GlobalExceptionHandler` maps exceptions to HTTP status codes
 - **Tenant-scoped 404s** — a resource from another tenant returns 404 (not 403) to avoid
-  leaking resource existence — the same security pattern Salesforce applies in their API
+  leaking resource existence — a standard security pattern in enterprise multi-tenant APIs
 
 ---
 

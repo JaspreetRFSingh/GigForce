@@ -1,21 +1,20 @@
 # GigForce 🚀
 
 > **Multi-tenant SaaS CRM for freelancers** — a portfolio project demonstrating
-> enterprise-grade Java engineering aligned with the Salesforce Senior Software
-> Engineer role.
+> enterprise-grade Java engineering for production-ready SaaS platforms.
 
 ---
 
 ## The concept
 
-GigForce is what Salesforce would build if they targeted the gig economy.
-It is a fully functional CRM platform where multiple freelancer teams (tenants)
+GigForce applies the architecture of leading enterprise SaaS platforms to the
+gig economy. It is a fully functional CRM where multiple freelancer teams (tenants)
 manage contacts, track deals through a 6-stage sales pipeline, issue invoices,
 and view revenue analytics — all isolated from each other via a
 **multi-tenant architecture** backed by JWT authentication and event-driven
 notifications.
 
-Built with the same architectural patterns Salesforce uses in their own platform:
+Built on the architectural patterns found in best-in-class CRM and cloud platforms:
 multi-tenancy, API-first design, event-driven microservice communication, and
 layered domain separation.
 
