@@ -4,9 +4,7 @@
 > enterprise-grade Java engineering for production-ready SaaS platforms.
 
 ---
-
 ## The concept
-
 GigForce applies the architecture of leading enterprise SaaS platforms to the
 gig economy. It is a fully functional CRM where multiple freelancer teams (tenants)
 manage contacts, track deals through a 6-stage sales pipeline, issue invoices,
@@ -21,7 +19,6 @@ layered domain separation.
 ---
 
 ## Tech stack
-
 | Layer            | Technology                                       |
 |------------------|--------------------------------------------------|
 | Language         | Java 21 (records, sealed types, text blocks)     |
